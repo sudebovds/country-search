@@ -1,0 +1,31 @@
+.resultsWrapper {
+  max-width: 450px;
+  min-width: 350px;
+  width: 100%;
+  border: 1px solid lightgray;
+  padding: 0 5px;
+  overflow-x: hidden;
+  max-height: 350px;
+}
+
+.resultItem {
+  padding: 10px 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.resultItem a {
+  display: block;
+}
+
+.resultItem:first-child {
+  margin-top: 5px;
+}
+
+.resultItem:last-child {
+  margin-bottom: 0;
+}
+
+.resultItem:hover {
+  background: #e2e2e2;
+}
