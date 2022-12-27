@@ -38,7 +38,7 @@ export const getCountries = async ({ searchQuery, location }: ISearchQueryInterf
                               .filter(country => country
                                                       .name
                                                       ?.toLowerCase()
-                                                      ?.startsWith(string))
+                                                      ?.startsWith(string.toLowerCase()))
                                                       .map(country => ({
                                                               ...country,
                                                               distanceToLocation: countDistanseBetweenCountries(country, location)
