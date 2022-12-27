@@ -3,7 +3,7 @@ import { ICountry, ICountriesResponse } from "../../models/index";
 
 export const getCountry = async (countryName: string = ''): Promise<ICountry[]> => {
     try{
-        const getCountry = await fetch(`../data/countries_metadata.json`);
+        const getCountry = await fetch(`../../data/countries_metadata.json`);
         const data: ICountriesResponse = await getCountry.json();
 
         const country: ICountry[] = data.countries.filter(country => country.name?.toLowerCase() === countryName.toLowerCase());
