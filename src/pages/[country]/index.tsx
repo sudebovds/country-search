@@ -19,7 +19,7 @@ const Country: NextPage = () => {
   useEffect(() => {
     if(countryName){
       axios
-      .get(`/api/country/?country=${countryName}`)
+      .get(`/api/country?country=${countryName}`)
       .then((response: AxiosResponse<ICountry>) => setCountry(response.data))
     }
   }, [countryName]);
