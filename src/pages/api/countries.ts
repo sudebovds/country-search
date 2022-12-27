@@ -4,7 +4,7 @@ import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from 
 
 export const getCurrentLocation = async (userIP: string) => {
   try{
-      const getLocation = await fetch(`http://ip-api.com/json/${userIP}`);
+      const getLocation = await fetch(`http://ip-api.com/json/${userIP}`, { method: "GET", mode: 'cors', headers: { 'Content-Type': 'application/json',}});
       const location = await getLocation.json();
 
       return location;
