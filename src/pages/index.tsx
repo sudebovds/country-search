@@ -9,7 +9,7 @@ import { getCurrentLocation } from '../helpers'
 import useDebounce from '../hooks/useDebounce'
 import { ICountry, ILocation } from '../models'
 
-//Styles
+// Styles
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {

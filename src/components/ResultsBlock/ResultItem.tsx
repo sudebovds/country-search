@@ -2,10 +2,10 @@ import Link from 'next/link';
 import React from 'react'
 import { ICountry } from '../../models'
 
-//Styles
+// Styles
 import styles from './ResultsBlock.module.css';
 
-//Types
+// Types
 interface IResultItem{
     country: ICountry, 
     query: string

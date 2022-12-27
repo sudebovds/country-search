@@ -7,7 +7,7 @@ import Layout from '../../components/Layout'
 /* import { getCountry } from '../../helpers'; */
 import { ICountry } from '../../models';
 
-//Styles
+// Styles
 import styles from '../../styles/Country.module.css';
 
 const Country: NextPage = () => {
@@ -30,8 +30,7 @@ const Country: NextPage = () => {
     >
       {
         country && (
-          <>
-            <section className={''}>
+          <section className="">
               <header>
                 <h1>{country.name}</h1>
               </header>
@@ -68,8 +67,7 @@ const Country: NextPage = () => {
                   <div>{country.sovereignt}</div>
                 </div>
               </main>
-            </section>         
-          </>
+            </section>
         )
       }
     </Layout>

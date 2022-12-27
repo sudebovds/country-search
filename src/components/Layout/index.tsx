@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 
-//Styles
+// Styles
 import styles from './Layout.module.css'
 
 type LayoutType = {
@@ -14,8 +14,7 @@ const Layout: React.FC<LayoutType> = ({
     children,
     title = 'Countries search app',
     description = 'Countries search app'
-}) => {
-  return (
+}) => (
     <div className={styles.container}>
         <Head>
             <title>{title}</title>
@@ -25,6 +24,10 @@ const Layout: React.FC<LayoutType> = ({
         {children}
     </div>
   )
-}
+
+  Layout.defaultProps={
+    title: 'Countries search app',
+    description: 'Countries search app'
+  }
 
 export default Layout

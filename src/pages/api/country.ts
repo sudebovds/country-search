@@ -1,5 +1,5 @@
-import { ICountry, ICountriesResponse } from './../../models/index';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { ICountry, ICountriesResponse } from "../../models/index";
 
 export const getCountry = async (countryName: string = ''): Promise<ICountry[]> => {
     try{

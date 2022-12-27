@@ -1,15 +1,14 @@
-import { ICountry, ISearchQueryInterface } from './../../models/index';
-import { ICountriesResponse, ILocation } from '../../models/index';
-
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from "../../models/index";
+
 
 export const countDistanseBetweenCountries = (country: any, location: any) => {
-  const countryLon = parseInt(country.lng);
-  const countryLat = parseInt(country.lat);
-  const locationLon = parseInt(location.lon);
-  const locationLat = parseInt(location.lat);
+  const countryLon = parseInt(country.lng, 10);
+  const countryLat = parseInt(country.lat, 10);
+  const locationLon = parseInt(location.lon, 10);
+  const locationLat = parseInt(location.lat, 10);
 
-  const distance = Math.sqrt(Math.pow(((locationLon) - (countryLon)), 2) + Math.pow(((locationLat) - (countryLat)), 2));
+  const distance = Math.sqrt(((locationLon) - (countryLon))**2 + ((locationLat) - (countryLat))**2);
 
   return distance;
 }
@@ -27,12 +26,10 @@ export const getCountries = async ({ searchQuery, location }: ISearchQueryInterf
                                                       .name
                                                       ?.toLowerCase()
                                                       ?.startsWith(string))
-                                                      .map(country => {
-                                                          return {
+                                                      .map(country => ({
                                                               ...country,
                                                               distanceToLocation: countDistanseBetweenCountries(country, location)
-                                                          }
-                                                      });
+                                                          }));
       const sortedData = filteredData.sort((nextCountry, prevCountry) => nextCountry.distanceToLocation - prevCountry.distanceToLocation);
       
       return sortedData;
