@@ -1,0 +1,27 @@
+.searchInput {
+  max-width: 450px;
+  min-width: 350px;
+  width: 100%;
+  padding: 15px 25px;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  color: black;
+  transition: all 0.3s linear;
+}
+
+.searchInput::placeholder {
+  color: rgb(211, 211, 211);
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+
+.searchInput:focus {
+  outline: none;
+  border: 1px solid rgb(39, 128, 207);
+}
+
+.searchInput:focus::placeholder {
+  visibility: hidden;
+  opacity: 0;
+}

@@ -1,0 +1,39 @@
+.resultsWrapper {
+  max-width: 450px;
+  min-width: 350px;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-top: none;
+  padding: 0 5px;
+  overflow-x: hidden;
+  max-height: 350px;
+}
+
+.resultItem {
+  padding: 10px 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
+}
+
+.resultItem a {
+  display: block;
+}
+
+.resultItem:first-child {
+  margin-top: 5px;
+}
+
+.resultItem:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.resultItem:hover {
+  background: #e2e2e2;
+}
+
+.noMathces {
+  padding: 15px;
+  color: lightcoral;
+}
