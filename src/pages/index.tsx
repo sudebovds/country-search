@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   const debounced = useDebounce(searchQuery);
 
   useEffect(() => {
-    if(debounced.length > 0 && location){
+    if(debounced.length > 0){
       axios
         .get(`/api/countries/?searchString=${debounced}`)
         .then((response: AxiosResponse<ICountry[]>) => setCountries(response.data));

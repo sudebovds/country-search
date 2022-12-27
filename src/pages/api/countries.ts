@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from "../../models/index";
 import requestIp from 'request-ip'
+import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from "../../models/index";
 import { getCurrentLocation } from '../../helpers';
 
 
