@@ -1,7 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import requestIp from 'request-ip'
 import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from "../../models/index";
-import { getCurrentLocation } from '../../helpers';
+
+export const getCurrentLocation = async (userIP: string) => {
+  try{
+      const getLocation = await fetch(`http://ip-api.com/json/${userIP}`);
+      const location = await getLocation.json();
+
+      return location;
+  } 
+  catch(e){
+      return e
+  }
+}
 
 
 export const countDistanseBetweenCountries = (country: any, location: any) => {
