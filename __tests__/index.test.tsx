@@ -1,13 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import Home from '../src/pages/index'
 
-describe('Home', () => {
-  it('renders a heading', () => {
+describe('Main page render', () => {
+  it('renders a title', () => {
     render(<Home />)
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+    const heading = screen.getByText('Find the closest country')
 
     expect(heading).toBeInTheDocument()
   })

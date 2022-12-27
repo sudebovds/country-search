@@ -1,9 +1,9 @@
-import React, { Dispatch, ReactEventHandler } from 'react'
+import React, { Dispatch } from 'react'
 
-//Styles
+// Styles
 import styles from './SearchInput.module.css';
 
-//Types
+// Types
 
 interface ISearchInputInterface{
     query?: string;
@@ -27,6 +27,10 @@ const SearchInput: React.FC<ISearchInputInterface> = ({ query, setQuery }) => {
         onChange={e => changeValueHandler(e)}
     />
   )
+}
+
+SearchInput.defaultProps={
+  query: ''
 }
 
 export default SearchInput
