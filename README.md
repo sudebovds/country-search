@@ -11,3 +11,9 @@ Just clone the main branch and run:
 ## npm i -> npm run dev
 
 for start a dev version
+
+Short demo: 
+
+https://user-images.githubusercontent.com/66118089/209675258-690c9b05-3407-4188-905a-c25e558951d8.mp4
+
+
