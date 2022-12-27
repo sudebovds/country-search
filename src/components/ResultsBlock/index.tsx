@@ -5,13 +5,21 @@ import ResultItem from './ResultItem';
 //Styles
 import styles from './ResultsBlock.module.css';
 
-const ResultsBlock: React.FC<ICountriesResponse> = ({ countries }) => {
+interface IResultBlockInterface extends ICountriesResponse{
+  query: string
+}
+
+const ResultsBlock: React.FC<IResultBlockInterface> = ({ countries, query }) => {
   return (
     <ul className={styles.resultsWrapper}>
         {
-            countries && countries.map(country => {
-            return <ResultItem country={country}/>
-            })
+            countries.length > 0 ? countries.map(country => {
+            return <ResultItem 
+                      key={`${country.pop_est}${country.adm0_a3}`}
+                      country={country}
+                      query={query}
+                    />
+            }) : <p className={styles.noMathces}>No matches found</p>
         }
     </ul>
   )

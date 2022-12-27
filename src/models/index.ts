@@ -35,3 +35,25 @@ export interface ICountry {
 export interface ICountriesResponse {
     countries: ICountry[];
 }
+
+export interface ILocation {
+    status: string;
+    country: string;
+    countryCode: string;
+    region: string;
+    regionName: string;
+    city: string;
+    zip: string;
+    lat: number;
+    lon: number;
+    timezone: string;
+    isp: string;
+    org: string;
+    as: string;
+    query: string;
+}
+
+export interface ISearchQueryInterface { 
+    searchQuery: string;
+    location: ILocation;
+};
