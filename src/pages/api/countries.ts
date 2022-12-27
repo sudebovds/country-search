@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import requestIp from 'request-ip'
 import { ICountry, ISearchQueryInterface , ICountriesResponse, ILocation } from "../../models/index";
+import { getCurrentLocation } from '../../helpers';
 
 
 export const countDistanseBetweenCountries = (country: any, location: any) => {
@@ -44,8 +46,9 @@ export default async function handler(
   res: NextApiResponse<ICountry[]>
 ) {
   if(req.method === 'GET'){
+    const userIp = requestIp.getClientIp(req) ?? '213.208.132.223';
     const searchString = req.query.searchString?.toString() ?? '';
-    const location: ILocation = req.query.location && JSON.parse(req.query.location?.toString());
+    const location: ILocation = await getCurrentLocation(userIp!);
     const dataResponse = await getCountries({ searchQuery: searchString, location });
   
     res.status(200).json(dataResponse)
