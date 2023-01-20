@@ -22,8 +22,8 @@ export const countDistanseBetweenCountries = (country: any, location: any) => {
   const locationLatRad = (parseInt(location.lat, 10) * Math.PI) / 180;
 
   const E_RADIUS: number = 6371;
-  const havsinLat = Math.pow(Math.sin((countryLatRad - locationLatRad) / 2), 2);
-  const havsinLon = Math.pow(Math.sin((countryLonRad - locationLonRad) / 2), 2);
+  const havsinLat = Math.sin((countryLatRad - locationLatRad) / 2)**2;
+  const havsinLon = Math.sin((countryLonRad - locationLonRad) / 2)**2;
 
   const distance = 2 * E_RADIUS * Math.sqrt(havsinLat + Math.cos(countryLatRad) * Math.cos(locationLatRad) * havsinLon);
 
