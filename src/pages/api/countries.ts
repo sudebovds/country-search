@@ -9,19 +9,23 @@ export const getCurrentLocation = async (userIP: string) => {
 
       return location;
   } 
-  catch(e){
-      return e
-  }
+  catch(e: any){
+    throw new Error('This is the error in the location detection: ', e)
+}
 }
 
 
 export const countDistanseBetweenCountries = (country: any, location: any) => {
-  const countryLon = parseInt(country.lng, 10);
-  const countryLat = parseInt(country.lat, 10);
-  const locationLon = parseInt(location.lon, 10);
-  const locationLat = parseInt(location.lat, 10);
+  const countryLonRad = (parseInt(country.lng, 10) * Math.PI) / 180;
+  const countryLatRad = (parseInt(country.lat, 10) * Math.PI) / 180;
+  const locationLonRad = (parseInt(location.lon, 10) * Math.PI) / 180;
+  const locationLatRad = (parseInt(location.lat, 10) * Math.PI) / 180;
 
-  const distance = Math.sqrt(((locationLon) - (countryLon))**2 + ((locationLat) - (countryLat))**2);
+  const E_RADIUS: number = 6371;
+  const havsinLat = Math.sin((countryLatRad - locationLatRad) / 2)**2;
+  const havsinLon = Math.sin((countryLonRad - locationLonRad) / 2)**2;
+
+  const distance = 2 * E_RADIUS * Math.sqrt(havsinLat + Math.cos(countryLatRad) * Math.cos(locationLatRad) * havsinLon);
 
   return distance;
 }
@@ -47,8 +51,8 @@ export const getCountries = async ({ searchQuery, location }: ISearchQueryInterf
       
       return sortedData;
   }
-  catch(e){
-      throw new Error()
+  catch(e: any){
+      throw new Error('This is the error: ', e)
   }
 }
 
@@ -57,7 +61,7 @@ export default async function handler(
   res: NextApiResponse<ICountry[]>
 ) {
   if(req.method === 'GET'){
-    const userIp = requestIp.getClientIp(req) ?? '213.208.132.223';
+    const userIp = requestIp.getClientIp(req) && requestIp.getClientIp(req) !== '::1' ? requestIp.getClientIp(req) : '213.208.132.223';
     const searchString = req.query.searchString?.toString() ?? '';
     const location: ILocation = await getCurrentLocation(userIp!);
     const dataResponse = await getCountries({ searchQuery: searchString, location });
