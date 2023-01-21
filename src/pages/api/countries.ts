@@ -45,7 +45,8 @@ export const getCountries = async ({ searchQuery, location }: ISearchQueryInterf
                                                       ?.startsWith(string.toLowerCase()))
                                                       .map(country => ({
                                                               ...country,
-                                                              distanceToLocation: countDistanseBetweenCountries(country, location)
+                                                              distanceToLocation: countDistanseBetweenCountries(country, location),
+                                                              userLocation: location
                                                           }));
       const sortedData = filteredData.sort((nextCountry, prevCountry) => nextCountry.distanceToLocation - prevCountry.distanceToLocation);
       
