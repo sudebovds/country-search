@@ -22,8 +22,8 @@ export const countDistanseBetweenCountries = (country: any, location: any) => {
   const locationLatRad = (parseInt(location.lat, 10) * Math.PI) / 180;
 
   const E_RADIUS: number = 6371;
-  const havsinLat = Math.sin((countryLatRad - locationLatRad) / 2)**2;
-  const havsinLon = Math.sin((countryLonRad - locationLonRad) / 2)**2;
+  const havsinLat = Math.sin((locationLatRad - countryLatRad) / 2)**2;
+  const havsinLon = Math.sin((locationLonRad - countryLonRad) / 2)**2;
 
   const distance = 2 * E_RADIUS * Math.sqrt(havsinLat + Math.cos(countryLatRad) * Math.cos(locationLatRad) * havsinLon);
 
@@ -61,7 +61,7 @@ export default async function handler(
   res: NextApiResponse<ICountry[]>
 ) {
   if(req.method === 'GET'){
-    const userIp = requestIp.getClientIp(req) && requestIp.getClientIp(req) !== '::1' ? requestIp.getClientIp(req) : '213.208.132.223';
+    const userIp = requestIp.getClientIp(req) !== '::1' ? requestIp.getClientIp(req) : '213.208.132.223';
     const searchString = req.query.searchString?.toString() ?? '';
     const location: ILocation = await getCurrentLocation(userIp!);
     const dataResponse = await getCountries({ searchQuery: searchString, location });
