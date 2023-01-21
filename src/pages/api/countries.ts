@@ -61,7 +61,7 @@ export default async function handler(
   res: NextApiResponse<ICountry[]>
 ) {
   if(req.method === 'GET'){
-    const userIp = requestIp.getClientIp(req) !== '::1' ? requestIp.getClientIp(req) : '213.208.132.223';
+    const userIp = requestIp.getClientIp(req);
     const searchString = req.query.searchString?.toString() ?? '';
     const location: ILocation = await getCurrentLocation(userIp!);
     const dataResponse = await getCountries({ searchQuery: searchString, location });
