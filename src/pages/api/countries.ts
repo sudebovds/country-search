@@ -25,7 +25,7 @@ export const countDistanseBetweenCountries = (country: any, location: any) => {
   const havsinLat = Math.sin((locationLatRad - countryLatRad) / 2)**2;
   const havsinLon = Math.sin((locationLonRad - countryLonRad) / 2)**2;
 
-  const distance = 2 * E_RADIUS * Math.sqrt(havsinLat + Math.cos(countryLatRad) * Math.cos(locationLatRad) * havsinLon);
+  const distance = 2 * E_RADIUS * Math.asin(Math.sqrt(havsinLat + Math.cos(countryLatRad) * Math.cos(locationLatRad) * havsinLon));
 
   return distance;
 }
@@ -45,8 +45,8 @@ export const getCountries = async ({ searchQuery, location }: ISearchQueryInterf
                                                       ?.startsWith(string.toLowerCase()))
                                                       .map(country => ({
                                                               ...country,
-                                                              distanceToLocation: countDistanseBetweenCountries(country, location),
-                                                              userLocation: location
+                                                              distanceToLocation: countDistanseBetweenCountries(country, location)/* ,
+                                                              userLocation: location */
                                                           }));
       const sortedData = filteredData.sort((nextCountry, prevCountry) => nextCountry.distanceToLocation - prevCountry.distanceToLocation);
       
