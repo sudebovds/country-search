@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import Layout from '../../components/Layout'
-/* import { getCountry } from '../../helpers'; */
 import { ICountry } from '../../models';
 
 // Styles
@@ -12,7 +11,13 @@ import styles from '../../styles/Country.module.css';
 const Country: NextPage = () => {
   const router = useRouter();
 
-  const countryName = useMemo(() => router.query.country?.toString(), [router]);
+  const countryName = useMemo(() => {
+    const countryName = router.query.country ? router.query.country.toString() : '';
+
+    return countryName;
+
+  }, [router]);
+  
   const [country, setCountry] = useState<ICountry>();
 
   useEffect(() => {

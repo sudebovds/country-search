@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react'
-import { kebabCase } from 'lodash'
 import Image from 'next/image';
 import { ICountry } from '../../models'
 
@@ -16,7 +15,7 @@ interface IResultItem{
 const ResultItem: React.FC<IResultItem> = ({ country, query }) => {
   const formatedQuery = query[0] ? query[0].toUpperCase() + query.slice(1) : '';
   const linkTitle = country.name.common?.split(formatedQuery) ?? '';
-  const countryLink = kebabCase(country.name.common).toLowerCase();
+  const countryLink = country.name.common.toLowerCase();
   const countryFlagsLink = country.flags.svg ?? country.flags.png ?? '';
 
   return (
