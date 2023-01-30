@@ -17,7 +17,7 @@ const Country: NextPage = () => {
     return countryName;
 
   }, [router]);
-  
+
   const [country, setCountry] = useState<ICountry>();
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Country: NextPage = () => {
                 </div>}
                 {country && country.population && <div className={styles.row}>
                   <div><strong>Population: </strong></div>
-                  <div>{new Intl.NumberFormat('en-EN').format(country.population)} prople</div>
+                  <div>{new Intl.NumberFormat('en-EN').format(country.population)} piople</div>
                 </div>}
               </main>
             </section>
