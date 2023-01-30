@@ -79,7 +79,7 @@ const Country: NextPage = () => {
                 </div>}
                 {country && country.population && <div className={styles.row}>
                   <div><strong>Population: </strong></div>
-                  <div>{new Intl.NumberFormat('en-EN').format(country.population)} piople</div>
+                  <div>{new Intl.NumberFormat('en-EN').format(country.population)} people</div>
                 </div>}
               </main>
             </section>
