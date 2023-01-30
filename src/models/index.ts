@@ -1,41 +1,66 @@
 export interface ICountry {
-    labelrank?: number;
-    featurecla?: string;
-    sovereignt?: string;
-    sov_a3?: string;
-    adm0_dif?: number;
-    level?: number;
-    type?: string;
-    admin?: string;
-    adm0_a3?: string;
-    geou_dif?: number;
-    geounit?: string;
-    gu_a3?: string;
-    su_dif?: number;
-    subunit?: string;
-    su_a3?: string;
-    name?: string;
-    abbrev?: string;
-    postal?: string;
-    name_forma?: string;
-    terr_?: string;
-    name_sort?: string;
-    map_color?: number;
-    pop_est?: number;
-    gdp_md_est?: number;
-    fips_10_?: number;
-    iso_a2?: string;
-    iso_a3?: string;
-    iso_n3?: number;
-    flag_png?: string;
-    lat?: number;
-    lng?: number;
+    name: {
+        common: string;
+        official: string;
+        nativeName: {
+            [key: string]: {
+                official: string;
+                common: string;
+            }
+        };
+    };
+    tld: string[];
+    cca2: string;
+    ccn3: string;
+    cca3: string;
+    cioc: string;
+    independent: boolean;
+    status: string;
+    unMember: boolean;
+    currencies: {
+        [key: string]: {
+          name: string;
+          symbol: string;
+        }
+    };
+    idd: {
+        root: string;
+        suffixes: string[];
+    };
+    capital: string[];
+    altSpellings: string[];
+    region: string;
+    subregion: string;
+    languages: {
+        [key: string]: string;
+    };
+    translations: {
+        [key: string]: {
+            official: string;
+            common: string;
+        }
+    };
+    latlng: [number, number];
+    landlocked: boolean;
+    area: number;
+    flag: string;
+    flags: {
+        png: string;
+        svg: string;
+    };
+    demonyms: {
+        [key: string]: {
+            [key: string]:string;
+        }
+    };
+    population: number;
+}
+export type TCountriesResponse = ICountry[];
+interface IExtendedCountriesList extends ICountry{
+    distanceToLocation: number;
 }
 
-export interface ICountriesResponse {
-    countries: ICountry[];
-}
-
+export type TCountriesResponseData = IExtendedCountriesList[];
 export interface ILocation {
     status: string;
     country: string;

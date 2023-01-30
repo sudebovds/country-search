@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-   async headers() {
+  images: { domains: ['flagcdn.com'], },
+  async headers() {
       return [
         {
           // matching all API routes

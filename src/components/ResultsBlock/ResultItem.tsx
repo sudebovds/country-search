@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
+import { kebabCase } from 'lodash'
+import Image from 'next/image';
 import { ICountry } from '../../models'
 
 // Styles
@@ -13,14 +15,26 @@ interface IResultItem{
 
 const ResultItem: React.FC<IResultItem> = ({ country, query }) => {
   const formatedQuery = query[0] ? query[0].toUpperCase() + query.slice(1) : '';
-  const linkTitle = country.name?.split(formatedQuery) ?? '';
+  const linkTitle = country.name.common?.split(formatedQuery) ?? '';
+  const countryLink = kebabCase(country.name.common).toLowerCase();
+  const countryFlagsLink = country.flags.svg ?? country.flags.png ?? '';
 
   return (
     <li className={styles.resultItem}>
         <Link 
-        href={`/${country.name}`}
+        href={`/${countryLink}`}
         >
-            <a><b>{formatedQuery}</b>{linkTitle[1]}</a>
+            <a className={styles.resultItem__link}>
+              <span className={styles.resultsItem__image}>
+                <Image 
+                  src={countryFlagsLink}
+                  width={30}
+                  height={25}
+                  alt={country.name.common}
+                />
+              </span>
+              <b>{formatedQuery}</b>{linkTitle[1]}
+            </a>
         </Link>
     </li>
   )

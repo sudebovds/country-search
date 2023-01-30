@@ -1,14 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ICountry, ICountriesResponse } from "../../models/index";
+import { ICountry, TCountriesResponse } from "../../models/index";
 
-export const getCountry = async (countryName: string = ''): Promise<ICountry[]> => {
+export const getCountry = async (countryName: string = ''): Promise<ICountry> => {
     try{
-        const getCountry = await fetch(`${process.env.LOCAL_HOST}/data/countries_metadata.json`);
-        const data: ICountriesResponse = await getCountry.json();
+        const getCountry = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+        const data: TCountriesResponse = await getCountry.json();
 
-        const country: ICountry[] = data.countries.filter(country => country.name?.toLowerCase() === countryName.toLowerCase());
 
-        return country;
+        return data[0];
     }
     catch(e){
         throw new Error()
@@ -23,6 +22,6 @@ export default async function handler(
       const countryName = req.query.country?.toString() ?? '';
       const dataResponse = await getCountry(countryName);
     
-      res.status(200).json(dataResponse[0])
+      res.status(200).json(dataResponse)
     }
   }
