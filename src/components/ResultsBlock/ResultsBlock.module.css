@@ -16,8 +16,15 @@
   border-bottom: 1px solid lightgray;
 }
 
-.resultItem a {
-  display: block;
+.resultItem__link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.resultsItem__image {
+  display: inline-flex;
+  margin-right: 15px;
 }
 
 .resultItem:first-child {

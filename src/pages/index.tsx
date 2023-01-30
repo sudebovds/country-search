@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+/* import axios, { AxiosResponse } from 'axios' */
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
@@ -6,22 +6,22 @@ import ResultsBlock from '../components/ResultsBlock'
 import SearchInput from '../components/SearchInput'
 import Title from '../components/Title'
 import useDebounce from '../hooks/useDebounce'
-import { ICountry } from '../models'
+import { TCountriesResponseData } from '../models'
 
 // Styles
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [countries, setCountries] = useState<ICountry[]>([]);
+  const [countries, setCountries] = useState<TCountriesResponseData>([]);
   const [isDropdown, setIsDropdown] = useState(false);
   const debounced = useDebounce(searchQuery);
 
   useEffect(() => {
     if(debounced.length > 0){
-      axios
-        .get(`/api/countries/?searchString=${debounced}`)
-        .then((response: AxiosResponse<ICountry[]>) => setCountries(response.data));
+      fetch(`/api/countries/?searchString=${debounced}`)
+        .then((response: Response) => response.json())
+        .then((data: TCountriesResponseData) => setCountries(data));
       
       setIsDropdown(true)
     }
