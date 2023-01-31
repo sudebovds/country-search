@@ -28,6 +28,10 @@ export interface ICountry {
         suffixes: string[];
     };
     capital: string[];
+    coatOfArms: {
+        png: string;
+        svg: string;
+    }
     altSpellings: string[];
     region: string;
     subregion: string;
@@ -45,6 +49,7 @@ export interface ICountry {
     area: number;
     flag: string;
     flags: {
+        alt: string;
         png: string;
         svg: string;
     };
