@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
+import CountryRow from '../../components/CountryRow/CountryRow';
 import Layout from '../../components/Layout'
 import { ICountry } from '../../models';
 
@@ -29,7 +30,7 @@ const Country: NextPage = () => {
   }, [countryName]);
 
   const countryNativeName = useMemo(() => country && country.name.nativeName && Object.keys(country.name.nativeName)[0], [country]);
-  const countryCurrencies = useMemo(() => country && Object.keys(country.currencies)[0], [country])
+  const countryCurrencies = useMemo(() => country && Object.keys(country.currencies)[0], [country]);
 
   return (
     <Layout
@@ -42,13 +43,16 @@ const Country: NextPage = () => {
                 <h1>{country.name.official}</h1>
               </header>
               <main className={styles.countryWrapper}>
-                <div className={styles.row}>
-                  <div><strong>Official name: </strong></div>
-                  <div>{country.name.official}</div>
-                </div>
-                <div className={styles.row}>
-                  <div><strong>Flag: </strong></div>
-                  <div className={styles.flag}>
+                <CountryRow 
+                  className={styles.row}
+                  title={'Official name: '}
+                  content={country.name.official}
+                />
+                <CountryRow 
+                  className={styles.row}
+                  title={'Flag: '}
+                  content={
+                    <div className={styles.flag}>
                     <Image 
                       src={country.flags.svg}
                       alt={`${country.name.common} flag`}
@@ -56,31 +60,46 @@ const Country: NextPage = () => {
                       objectFit='contain'
                     />
                   </div>
-                </div>
-                <div className={styles.row}>
-                  <div><strong>Capital: </strong></div>
-                  <div>{country.capital}</div>
-                </div>
-                <div className={styles.row}>
-                  <div><strong>Is independent: </strong></div>
-                  <div>{country.independent ? 'Independent' : 'No'}</div>
-                </div>
-                <div className={styles.row}>
-                  <div><strong>Area: </strong></div>
-                  <div>{country.area} sqr. km</div>
-                </div>
-                {country && countryNativeName && <div className={styles.row}>
-                  <div><strong>Native name: </strong></div>
-                  <div>{country.name.nativeName[countryNativeName].official}</div>
-                </div>}
-                {country && countryCurrencies && <div className={styles.row}>
-                  <div><strong>Currencies: </strong></div>
-                  <div>{country.currencies[countryCurrencies].name} ({country.currencies[countryCurrencies].symbol})</div>
-                </div>}
-                {country && country.population && <div className={styles.row}>
-                  <div><strong>Population: </strong></div>
-                  <div>{new Intl.NumberFormat('en-EN').format(country.population)} people</div>
-                </div>}
+                  }
+                />
+                <CountryRow 
+                  className={styles.row}
+                  title={'Capital: '}
+                  content={country.capital}
+                />
+                <CountryRow 
+                  className={styles.row}
+                  title={'Is independent: '}
+                  content={country.independent ? 'Independent' : 'No'}
+                />
+                <CountryRow 
+                  className={styles.row}
+                  title={'Area: '}
+                  content={`${country.area} sqr. km`}
+                />
+                {
+                  country && countryNativeName &&                 
+                  <CountryRow 
+                  className={styles.row}
+                  title={'Native name: '}
+                  content={country.name.nativeName[countryNativeName].official}
+                />
+                }                                                 
+                {country && countryCurrencies && 
+                  <CountryRow 
+                    className={styles.row}
+                    title={'Currencies: '}
+                    content={`${country.currencies[countryCurrencies].name} (${country.currencies[countryCurrencies].symbol})`}
+                  />
+                }
+                {
+                  country && country.population && 
+                  <CountryRow 
+                    className={styles.row}
+                    title={'Population: '}
+                    content={`${new Intl.NumberFormat('en-EN').format(country.population)} people`}
+                  />
+                }
               </main>
             </section>
         )
